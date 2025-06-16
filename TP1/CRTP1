@@ -1,0 +1,92 @@
+DataSet:
+
+points = np.array([
+    [2, 10],  #A1
+    [2, 5],   #A2
+    [8, 4],   #A3
+    [5, 8],   #B1
+    [7, 5],   #B2
+    [6, 4],   #B3
+    [1, 2],   #C1
+    [4, 9],   #C2
+    [5,4]   #C3
+])
+
+
+centroides_initiaux = np.array([
+    [2, 10],  # A1
+    [5, 8],   # B1
+    [1, 2]    # C1
+])
+K =3 qui est mon nombre de cluster
+
+Explication du code
+
+Importation de Numpy
+
+
+J'utilise Numpy pour savoir utiliser plus facilement les tableau.
+
+
+Mes données :
+
+On a un tableau  de 9 points.
+On donne notre nombre de Clusters qui est 3 ici.
+On fait un tableau des points choisis pour commencer l’algorithme
+pour les centroides initiaux
+On crée nos centroïdes initiaux avec les points que nous avons choisis.
+
+Fonction Euclidienne
+
+Cette fonction calcule la distance eudclidienne entre nos deux points.
+
+Fonction Cluster 
+Ctte fonction assigne chaque point à un cluster que le centroide est 
+le plus proche.
+
+Nos parametres sont les centroides actuels et les points que l'on assigne
+à nos clusters.
+on commence la liste cluster à vide pour stocker les points 
+de chaque cluster.
+Pour chaque point, on calcule la distance euclidienne vers 
+chaque centroide.
+On trouve l'indice du centroide le plus proche du point et 
+on attribue ce point au cluster.
+
+
+Fonction pour mettre à jour les centroides.
+Elle met à jour les centroides en calculant la moyenne des points de
+chaque cluster.
+On récupere notre collection(clusters) de cluster qui contient les points de chaque cluster.
+on crée une liste vide de centroide 
+Pour chaque cluster, on calcule la moyenne des points.
+La moyenne est calculée sur l'axe 0 (les colonnes) ce qui permet d'avoir 
+les coordonnées du nouveau centroide.
+Les nouveaux centroides sont stockés dans une liste centroides
+
+
+Fonction pour vérifier si il a eu changement dan les centroides
+Elle vérifie si les centroides ont changé par rapport à l'itération d'avant.
+On a comme parametre les centroides de l'itération précedente et les nouvelles.
+On calcule la distance entre chaque nouveau et ancien centroide.
+On vérifie la somme des distance est égale à O et si égale cela veut dire
+que les centroides n'ont pas changé.
+Et si distance égal 0 True et False dans le cas contraire.
+
+Fonction KMEANS
+les parametres de Kmeans : On prend notre liste de point et nos centroides initiaux.
+Les centroides sont init avec les valeurs de départ.
+On démarre l'iteration à 0.
+Tant que vrai On continue:
+		On sauvegarde les centroide dans anciens_centroides avant 
+		qu'il est une mise à jour.
+		On assigne les points à un cluster qui va au centroide qui
+		est le plus proche.
+		On met à jour les centroides en faisant la moyenne.
+		On incrémente l'itération.
+		Et enfin on vérifie si les centroides on changé si Vrai
+		C'est à dire que la somme des distances entre l'ancien
+		centroide et le nouveau centroide on s'arrete la boucle.
+Elle retourn les centroides finaux, les clusters qu'on a formés 
+et le nombre d'itérations que nous avons effectués
+
