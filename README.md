@@ -1,135 +1,98 @@
+# DataSciences - Projet d'Analyse de Données et Machine Learning
 
-# Implémentation Simple de K-Means en Python
+## Structure du Projet
 
-Ce projet présente une implémentation basique de l’algorithme K-means pour la classification non supervisée sur un petit jeu de données 2D.
+### 📁 TDNLP (Text Data & Natural Language Processing)
+Analyse de sentiments sur des données Twitter avec machine learning.
 
----
+#### Fichiers principaux :
+- **Exo1.py** : Préprocessing de texte avec nettoyage, tokenisation et stemming
+- **Exo2.py** : Classification de sentiments avec Random Forest et TF-IDF
+- **tweets.txt** : Dataset de tweets avec métadonnées (ID, utilisateur, texte, sentiment, etc.)
+- **US_Airlines_Twitter_Sentiment.csv** : Dataset de sentiments sur les compagnies aériennes
 
-## Dataset
+#### Fonctionnalités :
+- Nettoyage de texte (suppression ponctuation, emojis, stop words)
+- Tokenisation et stemming avec NLTK
+- Vectorisation TF-IDF
+- Classification Random Forest
+- Visualisation des distributions de sentiments
 
-Le jeu de données est constitué de 9 points 2D :
+### 📁 TP1 (K-Means Clustering)
+Implémentation et analyse de l'algorithme K-Means.
 
-```python
-points = np.array([
-    [2, 10],  # A1
-    [2, 5],   # A2
-    [8, 4],   # A3
-    [5, 8],   # B1
-    [7, 5],   # B2
-    [6, 4],   # B3
-    [1, 2],   # C1
-    [4, 9],   # C2
-    [5, 4]    # C3
-])
-````
+#### Fichiers principaux :
+- **Kmeans.py** : Implémentation complète de K-Means
+- **biblioSklearn.py** : Comparaison avec scikit-learn
+- **CRTP1** : Documentation détaillée de l'algorithme
+- **Images** : Visualisations des itérations (`Iteration1.png`, `Iteration2.png`, etc.)
 
-Le nombre de clusters (`K`) est fixé à 3, avec des centroides initiaux choisis parmi les points :
+#### Fonctionnalités :
+- Distance euclidienne
+- Assignment des points aux clusters
+- Mise à jour des centroïdes
+- Critère de convergence
+- Visualisation des itérations
 
-```python
-centroides_initiaux = np.array([
-    [2, 10],  # A1
-    [5, 8],   # B1
-    [1, 2]    # C1
-])
-```
+### 📁 TP2 (Clustering Avancé)
+Comparaison d'algorithmes de clustering avec évaluation de performance.
 
----
+#### Fichiers principaux :
+- **JeuDeDonnees.py** : Génération de datasets synthétiques avec `make_blobs`
+- **Kmeans.py** : K-Means avec différents scénarios d'initialisation
+- **FCmeans.py** : Fuzzy C-Means clustering
+- **Dunn.py** : Calcul de l'indice de Dunn pour évaluation
+- **Rapport.pdf** : Analyse comparative complète
 
-## Description des fonctions principales
+#### Fonctionnalités :
+- 3 scénarios d'initialisation des centroïdes
+- Clustering flou avec degré d'appartenance
+- Métriques d'évaluation (indice de Dunn)
+- Comparaison des performances
 
-### `euclidienne(x1, x2)`
+## 🛠️ Technologies Utilisées
 
-Calcule la distance euclidienne entre deux points `x1` et `x2`.
+### Librairies Python :
+- **Analyse de données** : `pandas`, `numpy`
+- **Visualisation** : `matplotlib`, `seaborn`
+- **Machine Learning** : `scikit-learn`
+- **NLP** : `nltk`, `re`
+- **Clustering flou** : `scikit-fuzzy`
+- **Distance** : `scipy.spatial.distance`
 
----
+### Algorithmes Implémentés :
+- K-Means (implémentation native)
+- Fuzzy C-Means
+- Random Forest pour classification
+- TF-IDF pour vectorisation de texte
 
-### `assigner_point_a_clusters(centroides, points)`
+## 📊 Datasets
 
-Attribue chaque point au cluster dont le centroïde est le plus proche en calculant les distances euclidiennes.
+1. **Tweets** : Données Twitter avec sentiments, métadonnées utilisateur
+2. **Airlines Sentiment** : Sentiments sur compagnies aériennes US
+3. **Données synthétiques** : Clusters générés avec `make_blobs`
 
----
+## 🚀 Utilisation
 
-### `mettre_a_jour_centroides(clusters)`
-
-Met à jour les centroides en calculant la moyenne des points appartenant à chaque cluster.
-
----
-
-### `voir_changement(anciens_centroides, nouveaux_centroides)`
-
-Détecte la convergence : retourne `True` si les centroides n’ont pas bougé, `False` sinon.
-
----
-
-### `kmeans(points, centroides_initiaux)`
-
-Fonction principale qui réalise les itérations jusqu’à convergence :
-
-* Assigne les points aux clusters.
-* Met à jour les centroides.
-* Affiche les informations à chaque itération.
-* Renvoie les centroides finaux, les clusters, et le nombre d’itérations.
-
----
-
-## Résultat attendu
-
-Le programme affiche à chaque itération :
-
-* Les coordonnées des centroides.
-* Les points de chaque cluster.
-
-Après convergence, il affiche les centroides finaux et produit une visualisation graphique des clusters et de leurs centroides.
-
----
-
-## Installation
-
-Installer les dépendances Python :
-
+### Prérequis :
 ```bash
-pip install numpy matplotlib
+pip install pandas numpy matplotlib seaborn scikit-learn nltk scikit-fuzzy scipy
 ```
 
----
+### Exécution :
+```bash
+# NLP et analyse de sentiments
+cd TDNLP
+python Exo1.py  # Préprocessing
+python Exo2.py  # Classification
 
-## Utilisation
+# Clustering K-Means
+cd TP1
+python Kmeans.py
 
-Lancer le script Python. La visualisation s’ouvre automatiquement à la fin du traitement.
-
----
-
-## Exemple de sortie
-
+# Clustering comparatif
+cd TP2
+python JeuDeDonnees.py  # Génération données
+python Kmeans.py        # K-Means
+python FCmeans.py       # Fuzzy C-Means
 ```
-Itération 1:
-Centroïde 0: (2.00, 7.67)
-Cluster 0: [array([2, 10]), array([2, 5]), array([4, 9])]
-Centroïde 1: (6.40, 5.20)
-Cluster 1: [array([8, 4]), array([7, 5]), array([6, 4]), array([5, 4])]
-Centroïde 2: (1.00, 2.00)
-Cluster 2: [array([1, 2])]
-...
-Centroides finaux après X itérations :
-Centroïde 0: (2.00, 7.67)
-Centroïde 1: (6.40, 5.20)
-Centroïde 2: (1.00, 2.00)
-```
-
----
-
-## Notes
-
-* Cet algorithme est sensible au choix initial des centroides.
-* Il peut être adapté pour des données multidimensionnelles.
-* Pour des applications plus robustes, utiliser les fonctions KMeans de bibliothèques comme scikit-learn.
-
----
-
-## Auteur
-
-Ton Nom - Projet d’apprentissage Python & Machine Learning
-
----
-
-N’hésite pas si tu souhaites que je te prépare un fichier README pour les autres versions (Fuzzy C-Means, visualisation plus avancée, etc.) !
